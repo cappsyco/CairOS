@@ -3,7 +3,7 @@
 name: cairos
 description: An OS named after my cat.
 base-image: quay.io/fedora-ostree-desktops/cosmic-atomic
-image-version: 43
+image-version: latest
 
 modules:
   - type: files
@@ -18,8 +18,11 @@ modules:
     install:
       packages:
         - vim
+        - just
         - gh
+        - tailscale
         - starship
+        - fastfetch
     remove:
       packages:
         - firefox
@@ -33,5 +36,11 @@ modules:
         install:
           - app.zen_browser.zen
       - scope: user
+      
+  - type: script
+    scripts:
+      - 00-image-info.sh
+      - 10-core.sh
+      - 99-cleanup.sh
 
   - type: signing
