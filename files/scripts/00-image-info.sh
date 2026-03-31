@@ -12,23 +12,11 @@ SUPPORT_URL="https://github.com/cappsyco/cairos/issues"
 BUG_SUPPORT_URL="https://github.com/cappsyco/cairos/issues"
 VERSION_CODENAME=""
 
-IMAGE_INFO="/usr/share/cairos/image-info.json"
 IMAGE_REF="ostree-image-signed:docker://ghcr.io/$IMAGE_VENDOR/$IMAGE_NAME"
 
 FEDORA_MAJOR_VERSION=$(awk -F= '/VERSION_ID/ {print $2}' /etc/os-release)
 BASE_IMAGE_NAME="COSMIC Atomic $FEDORA_MAJOR_VERSION"
-BASE_IMAGE="quay.io/fedora-ostree-desktops/xfce-atomic"
-
-cat >$IMAGE_INFO <<EOF
-{
-  "image-name": "$IMAGE_NAME",
-  "image-vendor": "$IMAGE_VENDOR",
-  "image-ref": "$IMAGE_REF",
-  "image-tag":"latest",
-  "base-image-name": "$BASE_IMAGE",
-  "fedora-version": "$FEDORA_MAJOR_VERSION"
-}
-EOF
+BASE_IMAGE="quay.io/fedora-ostree-desktops/cosmic-atomic"
 
 # OS Release File
 sed -i "s/^VARIANT_ID=.*/VARIANT_ID=$IMAGE_NAME/" /usr/lib/os-release
